@@ -1,0 +1,20 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Critique sur l'attraction {{attraction.nom}}</mat-card-title>
+  </mat-card-header>
+  <!-- Pour la prochaine fois concentre toi sur l'affichage du nom de l'attraction et de la modif ajout supp des comment -->
+  <mat-card-content>
+    <div class="attraction-title">
+      <div class="attraction">
+        <span>Note sur l'attraction</span>
+        <span>Commentaire sur l'attraction</span>
+      </div>
+    </div>
+    <ng-container *ngFor="let comment of comments | async;">
+      <div class="attraction">
+        <span>{{comment.note}}</span>
+        <span>{{comment.commentaire}}</span>
+      </div>
+    </ng-container>
+  </mat-card-content>
+</mat-card>

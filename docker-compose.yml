@@ -32,3 +32,11 @@ services:
       - MYSQL_DATABASE=parc
       - MYSQL_USER=mysqlusr
       - MYSQL_PASSWORD=mysqlpwd
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    links:
+      - database

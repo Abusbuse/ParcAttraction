@@ -56,7 +56,8 @@ export class AdminComponent {
         nom: new FormControl("", [Validators.required]),
         description: new FormControl("", [Validators.required]),
         difficulte: new FormControl(),
-        visible: new FormControl(true)
+        visible: new FormControl(true),
+        critique: new FormControl()
       })
     );
   }

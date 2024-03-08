@@ -4,6 +4,7 @@ from flask_cors import CORS
 import request.request as req
 import controller.auth.auth as user
 import controller.attraction as attraction
+import controller.comment as comment
 
 app = Flask(__name__)
 CORS(app)
@@ -53,6 +54,41 @@ def deleteAttraction(index):
     json = request.get_json()
     
     if (attraction.delete_attraction(index)):
+        return "Element supprimé.", 200
+    return jsonify({"message": "Erreur lors de la suppression."}), 500
+
+# Partie commentaire
+@app.post('/attraction/comment')
+def addComment():
+    # Fonction vérif token
+    checkToken = user.check_token(request)
+    if (checkToken != True):
+        return checkToken
+
+    json = request.get_json()
+    retour = comment.add_comment(json)
+    if (retour):
+        return jsonify({"message": "Element ajouté.", "result": retour}), 200
+    return jsonify({"message": "Erreur lors de l'ajout.", "result": retour}), 500
+  
+@app.get('/attraction/comment')
+def get_all_comments():
+    result = comment.get_all_comments()
+    return result, 200
+
+@app.get('/attraction/<int:attraction_id>/comment')
+def get_comments_for_attraction(attraction_id):
+    result = comment.get_comments_for_attraction(attraction_id)
+    return result, 200
+
+@app.delete('/attraction/comment/<int:comment_id>')
+def delete_comment(comment_id):
+    # Fonction vérif token
+    checkToken = user.check_token(request)
+    if (checkToken != True):
+        return checkToken
+
+    if (comment.delete_comment(comment_id)):
         return "Element supprimé.", 200
     return jsonify({"message": "Erreur lors de la suppression."}), 500
 
