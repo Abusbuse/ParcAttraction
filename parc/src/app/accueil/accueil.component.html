@@ -8,7 +8,7 @@
         <span>Nom de l'attraction</span>
         <span>Description de l'attraction</span>
         <span>Difficulté de l'attraction / 5</span>
-        <span>Critique de la commu</span>
+        <span>Critiques</span>
       </div>
     </div>
     <ng-container *ngFor="let attraction of attractions | async;">
@@ -16,7 +16,6 @@
         <span>{{attraction.nom}}</span>
         <span>{{attraction.description}}</span>
         <span>{{attraction.difficulte}} / 5</span>
-        <!-- Bouton qui renvoi vers la page critique path: 'critique' -->
         <span>
           <button at-raised-button color="primary">
             <a [routerLink]="['/critique', attraction.attraction_id]">Critique</a>

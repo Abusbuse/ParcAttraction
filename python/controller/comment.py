@@ -14,15 +14,15 @@ def get_all_comments():
 
 def get_comments_for_attraction(attraction_id):
     if not attraction_id:
-        return False
+        return []
 
     comments = req.select_from_db("SELECT * FROM comment WHERE attraction_id = ?", (attraction_id,))
-    if not comments:
-        return False
+    # if not comments:
+    #     return False
 
     attraction = req.select_from_db("SELECT nom FROM attraction WHERE attraction_id = ?", (attraction_id,))
     if not attraction:
-        return False
+        return []
 
     # Récupérer le nom de l'attraction à partir du résultat de la requête
     attraction_name = attraction[0]['nom']

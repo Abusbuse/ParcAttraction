@@ -46,4 +46,9 @@ export class AuthService {
       this.user = null;
     }
   }
+
+  isAdmin(): boolean {
+    // Vérifiez si l'utilisateur est connecté et s'il a un rôle d'administrateur
+    return this.isLoggedIn && this.user?.name === "toto";
+  }
 }

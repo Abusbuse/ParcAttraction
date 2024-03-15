@@ -1,20 +1,32 @@
 <mat-card>
   <mat-card-header>
-    <mat-card-title>Critique sur l'attraction {{attraction.nom}}</mat-card-title>
+    <mat-card-title>Commentaire sur l'attraction</mat-card-title>
+    <button mat-button (click)="addComment()">Ajouter</button>
   </mat-card-header>
-  <!-- Pour la prochaine fois concentre toi sur l'affichage du nom de l'attraction et de la modif ajout supp des comment -->
   <mat-card-content>
     <div class="attraction-title">
       <div class="attraction">
-        <span>Note sur l'attraction</span>
         <span>Commentaire sur l'attraction</span>
+        <span>Note sur l'attraction</span>
       </div>
     </div>
-    <ng-container *ngFor="let comment of comments | async;">
-      <div class="attraction">
-        <span>{{comment.note}}</span>
-        <span>{{comment.commentaire}}</span>
-      </div>
+    <ng-container *ngIf="comments | async">
+      <ng-container *ngFor="let formulaireComment of formulaireComments; let indexForm = index;"
+        [formGroup]="formulaireComment"
+        style="display: flex; flex-direction: column;"
+      >
+        <div class="attraction">
+          <mat-form-field class="champ" appearance="fill">
+            <mat-label>Commentaire</mat-label>
+            <input matInput formControlName="commentaire">
+          </mat-form-field>
+          <mat-form-field class="champ" appearance="fill">
+            <mat-label>Note</mat-label>
+            <input matInput formControlName="note" type="number">
+          </mat-form-field>
+          <button mat-button (click)="onSubmitComment(formulaireComment)" class="champ">Enregistrer</button>
+        </div>
+      </ng-container>
     </ng-container>
   </mat-card-content>
 </mat-card>

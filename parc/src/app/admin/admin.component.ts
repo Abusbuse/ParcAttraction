@@ -10,11 +10,12 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatButtonModule } from '@angular/material/button';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { MatCardModule } from '@angular/material/card';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-admin',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSlideToggleModule, MatButtonModule, MatCardModule],
+  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatSlideToggleModule, MatButtonModule, MatCardModule, RouterLink],
   templateUrl: './admin.component.html',
   styleUrl: './admin.component.scss'
 })
@@ -47,6 +48,11 @@ export class AdminComponent {
         duration: 1000
       });
     });
+  }
+
+  public goToCritique(attraction: AttractionInterface) {
+    // rediriger vers la page de critique
+    console.log(attraction);
   }
 
   public addAttraction() {

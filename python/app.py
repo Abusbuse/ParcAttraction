@@ -57,6 +57,11 @@ def deleteAttraction(index):
         return "Element supprimé.", 200
     return jsonify({"message": "Erreur lors de la suppression."}), 500
 
+@app.get('/attraction/<int:index>')
+def getAttractionID(index):
+    result = attraction.get_attraction(index)
+    return result, 200
+  
 # Partie commentaire
 @app.post('/attraction/comment')
 def addComment():
@@ -72,17 +77,17 @@ def addComment():
     return jsonify({"message": "Erreur lors de l'ajout.", "result": retour}), 500
   
 @app.get('/attraction/comment')
-def get_all_comments():
+def getAllComments():
     result = comment.get_all_comments()
-    return result, 200
+    return jsonify({"message": "Element récupéré.", "result": result}), 200
 
 @app.get('/attraction/<int:attraction_id>/comment')
-def get_comments_for_attraction(attraction_id):
+def getCommentsForAttraction(attraction_id):
     result = comment.get_comments_for_attraction(attraction_id)
     return result, 200
 
 @app.delete('/attraction/comment/<int:comment_id>')
-def delete_comment(comment_id):
+def deleteComment(comment_id):
     # Fonction vérif token
     checkToken = user.check_token(request)
     if (checkToken != True):
